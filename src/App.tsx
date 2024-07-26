@@ -1,4 +1,7 @@
 import './App.css'
+import { StickyScrollRevealDemo } from './components/BottomSection.tsx';
+import MiddleSection from './components/MiddleSection.tsx';
+import { OrbitView } from './components/OrbitView.tsx';
 import { FloatingNav } from "./components/ui/floating-navbar.tsx"
 
 const navItems = [
@@ -20,23 +23,14 @@ const navItems = [
   }
 ];
 
-const DummyContent = () => {
-  return (
-    <div className="grid grid-cols-1 h-[80rem] w-full bg-white dark:bg-black relative border border-neutral-200 dark:border-white/[0.2] rounded-md">
-      <p className="dark:text-white text-neutral-600 text-center text-4xl mt-40 font-bold">
-        Scroll back up to reveal Navbar
-      </p>
-      <div className="inset-0 absolute bg-grid-black/[0.1] dark:bg-grid-white/[0.2]" />
-    </div>
-  );
-};
-
 function App() {
   return (
-    <div >
+    <div>
       <div className='w-full'>
-        <FloatingNav navItems={navItems} className={`sticky`} />
-        <DummyContent />
+        <FloatingNav navItems={navItems} className={`flex-row items-center justify-between`} />
+        <MiddleSection />
+        <OrbitView />
+        <StickyScrollRevealDemo />
       </div>
     </div >
   )
