@@ -2,18 +2,19 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useMotionValueEvent, useScroll } from "framer-motion";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export const StickyScroll = ({
   content,
-  contentClassName
+  contentClassName,
 }) => {
   const [activeCard, setActiveCard] = React.useState(0);
-  const ref = useRef(null);
+  const [parentDiv, setParentDiv] = useState<HTMLElement | null>(null);
+  const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     // uncomment line 22 and comment line 23 if you DONT want the overflow container and want to have it change on the entire page scroll
-    // target: ref
-    container: ref,
+    // target: ref,
+    container: parentDiv || ref,
     offset: ["start start", "end start"],
   });
   const cardLength = content.length;
@@ -29,6 +30,12 @@ export const StickyScroll = ({
     }, 0);
     setActiveCard(closestBreakpointIndex);
   });
+
+  useEffect(() => {
+    const sticky_div_container = document.getElementById("sticky_div_container");
+    if (sticky_div_container)
+      setParentDiv(sticky_div_container);
+  }, []);
 
   const backgroundColors = [
     "var(--slate-900)",
@@ -52,8 +59,8 @@ export const StickyScroll = ({
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
-      ref={ref}>
+      className="h-fit overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
+      >
       <div className="div relative flex items-start px-4">
         <div className="max-w-2xl">
           {content.map((item, index) => (
@@ -86,7 +93,7 @@ export const StickyScroll = ({
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "hidden lg:block h-60 w-80 rounded-md bg-white sticky top-10 overflow-hidden",
+          "hidden lg:block h-60 w-80 rounded-md bg-white sticky top-20 overflow-hidden",
           contentClassName
         )}>
         {content[activeCard].content ?? null}

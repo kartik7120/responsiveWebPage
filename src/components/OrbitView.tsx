@@ -3,13 +3,13 @@ import OrbitingCircles from "../components/magicui/orbiting-circles";
 
 export function OrbitView() {
     return (
-        <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background md:shadow-xl">
+        <div className="relative flex h-[900px] w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-background">
             {/* Inner Circles */}
             <OrbitingCircles
                 className="size-[30px] border-none bg-transparent"
                 duration={20}
                 delay={20}
-                radius={80}
+                radius={400}
             >
                 <Icons.whatsapp />
             </OrbitingCircles>
@@ -17,7 +17,7 @@ export function OrbitView() {
                 className="size-[30px] border-none bg-transparent"
                 duration={20}
                 delay={10}
-                radius={80}
+                radius={320}
             >
                 <Icons.notion />
             </OrbitingCircles>
@@ -41,20 +41,20 @@ export function OrbitView() {
             {/* Outer Circles (reverse) */}
             <OrbitingCircles
                 className="size-[50px] border-none bg-transparent"
-                radius={190}
-                duration={20}
-                reverse
-            >
-                <Icons.googleDrive />
-            </OrbitingCircles>
-            <OrbitingCircles
-                className="size-[50px] border-none bg-transparent"
-                radius={190}
+                radius={400}
                 duration={20}
                 delay={20}
                 reverse
             >
                 <Icons.gitHub />
+            </OrbitingCircles>
+            <OrbitingCircles
+                className="size-[50px] border-none bg-transparent"
+                radius={320}
+                duration={20}
+                reverse
+            >
+                <Icons.googleDrive />
             </OrbitingCircles>
             <OrbitingCircles
                 className="size-[50px] border-none bg-transparent"
